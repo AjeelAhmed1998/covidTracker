@@ -17,6 +17,7 @@ import {} from "@react-navigation/drawer";
 import {} from "@react-navigation/stack";
 
 import SearchedCountryDetails from "./eachCountryDetails";
+import { log } from "react-native-reanimated";
 
 // const Search = (props) => {
 //   const [loading, setLoading] = useState(true);
@@ -67,11 +68,11 @@ export default class Search extends React.Component {
       touchedCountry: "",
     };
     this.arrayholder = [];
-    this.countries = 'countries';
+    this.countries = "countries";
   }
-  
+
   componentDidMount() {
-    return fetch("https://api.covid19api.com/"+this.countries)//countries
+    return fetch("https://api.covid19api.com/" + this.countries) //countries
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState(
@@ -81,6 +82,8 @@ export default class Search extends React.Component {
           },
           function () {
             this.arrayholder = responseJson;
+            // console.log(this.arrayholder[2]["Slug"]);
+            
           }
         );
       })
@@ -128,17 +131,16 @@ export default class Search extends React.Component {
       );
     }
     return (
-      //ListView to show with textinput used as search bar
       <View style={styles.viewStyle}>
         <View style={styles.searchArea}>
           <TextInput
             style={styles.textInputStyle}
             onChangeText={(text) => this.SearchFilterFunction(text)}
-            value={this.state.touchedCountry}
+            // value={this.state.touchedCountry}
             // editable={true}
             underlineColorAndroid="transparent"
             placeholder="Search Here"
-            // clearButtonMode="always"
+            clearButtonMode="always"
           />
 
           <TouchableOpacity
@@ -171,10 +173,16 @@ export default class Search extends React.Component {
             <TouchableOpacity
               style={styles.textStyle}
               onPress={() => {
-                this.setState({
-                  touchedCountry: item.Country,
+                this.props.navigation.navigate("searched country", {
+                  searchedCountry: item.Country,
+                  searchedSlug: item.Slug,
                 });
               }}
+              // onPress={() => {
+              //   this.setState({
+              //     touchedCountry: item.Country,
+              //   });
+              // }}
             >
               <Text>{item.Country}</Text>
             </TouchableOpacity>

@@ -115,7 +115,7 @@ const Drawer = createDrawerNavigator();
 
 const MyDrawer = (props) => {
   return (
-    <Drawer.Navigator initialRouteName={"global"}>
+    <Drawer.Navigator initialRouteName={"stack"}>
       <Drawer.Screen name={"stack"} component={StackNavigator} ></Drawer.Screen>
 
       <Drawer.Screen name={"global"} component={GlobalDetails}></Drawer.Screen>
@@ -135,7 +135,7 @@ function MyTab(){
 
     <Tab.Navigator>
 
-      <Tab.Screen name="Asia" component={EachCountryDetails} continentName="Asia"></Tab.Screen>
+      <Tab.Screen name="Asia" component={EachCountryDetails } continentName="Asia"></Tab.Screen>
       <Tab.Screen name="Europe"  component={EachCountryDetails}></Tab.Screen>
     </Tab.Navigator>
 

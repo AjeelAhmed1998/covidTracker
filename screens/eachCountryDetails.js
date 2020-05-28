@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 // import {} from '@react-navigation/native'
 
 import CountryCard from "./countryCard";
+import { Switch } from "react-native-paper";
 
 export default class EachCountryDetails extends React.Component {
   constructor(props) {
@@ -10,13 +11,30 @@ export default class EachCountryDetails extends React.Component {
     this.state = {
       dataSource: "",
       country: "",
-      continent: this.props.continentNames,
+      // continent: this.props.continentNames,
     };
     this.keyholder = "";
     this.arrayOfCountries = [];
     this.post = "";
     this.country = "";
-    // this.continent = this.props.continentName; 
+    this.arrayOfContinents = ["Asia", "Europe"];
+    this.continent = "";
+    console.log("hello this is " +this.props.name);
+
+    
+    switch (this.props.route.name) {
+      case "Asia":
+        this.continent = "Asia";
+        break;
+      case "Europe":
+        this.continent = "Europe";
+        break;
+    }
+    // if(this.props.name = "Asia"){
+    //   this.continent = "Asia"
+    // }
+    // else
+    // this.continent = this.props.continentName;
   }
 
   componentDidMount(props) {
@@ -52,10 +70,10 @@ export default class EachCountryDetails extends React.Component {
 
     return (
       // console.log();
-      
-      //send the continent name as props in fetch so I can 
-      //keep the same screen 
-      fetch("http://disease.sh/v2/continents/"+ this.state.continent)
+
+      //send the continent name as props in fetch so I can
+      //keep the same screen
+      fetch("http://disease.sh/v2/continents/" + this.continent)
         .then((response) => response.json())
         .then((responseJson) => {
           this.setState(
@@ -73,6 +91,7 @@ export default class EachCountryDetails extends React.Component {
         //
         .then(() => {
           return fetch(
+            //I can't remember why I wrote the index number there
             "http://disease.sh/v2/countries/" + this.arrayOfCountries[0]
           );
 
@@ -104,47 +123,36 @@ export default class EachCountryDetails extends React.Component {
   //   return <Text>hello</Text>;
   // }
 
-
   // render() {
   //   const elements = ['one', 'two', 'three'];
-  
+
   //   const items = []
-  
+
   //   for (const [index, value] of elements.entries()) {
   //     items.push(<li key={index}>{value}</li>)
   //   }
-  
+
   //   return (
   //     <div>
   //       {items}
   //     </div>
   //   )
   // }
-  
-  render() {
-    const array = this.arrayOfCountries; 
 
-    // const items = []; 
+  render(props) {
+    const array = this.arrayOfCountries;
+
+    // const items = [];
     // for (let i=0; i<2; i++){
-    //   this.arrayOfCountries[i]; 
-    // } 
+    //   this.arrayOfCountries[i];
+    // }
 
     // for(const [])
     return (
       <View style={styles.screenContainer}>
-
-        {
-
-          array.map((name, index)=>(
-            <CountryCard
-            list = {array}
-            index = {index}
-            ></CountryCard>
-          ))
-
-        }
-
-
+        {array.map((name, index) => (
+          <CountryCard list={array} index={index}></CountryCard>
+        ))}
 
         {/* {
           
@@ -166,6 +174,7 @@ export default class EachCountryDetails extends React.Component {
         /> */}
 
         <Text>this is where you will get all information, continent wise </Text>
+        <Text>{this.props.route.name}</Text>
       </View>
     );
   }

@@ -32,12 +32,19 @@ export default class SearchedCountryDetails extends React.Component {
       // country: this.props.route.params,
       global: "",
       dataSource: "",
-      ND: '', 
+      ND: "",
+      Slug: "",
+      // dayoneSource: "south-africa",
+      // firstDayInfo: [], 
+
     };
 
     this.keyholder = "";
     this.countryList = [];
-
+    this.dayOneList = []; 
+    this.dayOneCountry = ""; 
+    this.firstDayInfo = "";
+    this.variablee = ""; 
     // this.ND = "";
 
     // console.log(this.countryList);
@@ -48,6 +55,7 @@ export default class SearchedCountryDetails extends React.Component {
   // }
   componentDidMount(props) {
     const { searchedCountry } = this.props.route.params;
+    const { searchedSlug } = this.props.route.params; 
     return fetch("https://api.covid19api.com/summary")
       .then((response) => response.json())
       .then((responseJson) => {
@@ -63,14 +71,20 @@ export default class SearchedCountryDetails extends React.Component {
               // const element = array[i]["Country"];
               let element;
 
-              element = this.countryList[i]["Country"];
-
-              if (element == searchedCountry) {
+              element = this.countryList[i]["Slug"]; //.Slug;
+              // console.log(element);
+              // slugElement = this.countryList[i]["Slusg"]; 
+              // console.log(slugElement);
+              
+              if (element == searchedSlug) {
                 // this.ND = this.countryList[i]["NewDeaths"];
                 this.setState({
-                  ND: this.countryList[i]["NewDeaths"]
-                })
-                console.log(this.countryList[i]["NewDeaths"]); 
+                  ND: this.countryList[i]["NewDeaths"],
+                  Slug: this.countryList[i]["Slug"],
+                });
+                console.log(this.countryList[i]["NewDeaths"]);
+
+                // console.log(this.countryList[i][Slug]);
               }
               // if(element == array[i]["Country"])
               // return
@@ -80,6 +94,67 @@ export default class SearchedCountryDetails extends React.Component {
           }
         );
       })
+
+      .then(() => {
+        return fetch(
+          ("https://api.covid19api.com/dayone/country/" + searchedSlug)
+        );
+      })
+
+      .then((response2) => response2.json())
+
+      .then((resopnseJson2) => {
+        this.setState(
+          {
+            // this is an array
+            dayoneSource: resopnseJson2,
+          }, 
+          function() {
+
+            // this.dayOneList
+
+
+
+
+            this.dayOneList = resopnseJson2; 
+
+            this.firstDayInfo = this.dayOneList[0]; 
+            // this.setState({
+
+            //   firstDayInfo:this.dayOneList[0]
+            // })
+
+            console.log(this.dayOneList);
+            
+
+            console.log("this is the info from firstDayInfo " + this.firstDayInfo.Active);
+
+            // this.variablee = this.firstDayInfo.Active
+            
+
+
+            // console.log("hello friend");
+            
+            // console.log(this.dayOneList);
+            
+            // for(let i = 0 ; i<this.dayOneList.length; i++){
+            //   if(this.dayOneList[i]["Slug"]==this.searchedSlug){
+
+            //     this.dayOneCountry=this.dayOneList[0]
+            //     console.log("day one info is right here " + this.dayOneCountry);
+                
+                
+            //   }
+            // }
+            
+          }
+          // function(){
+          //   // console.log("this is dayoneSource: "+this.state.dayoneSource);
+
+
+          // })
+        );
+      })
       .catch((error) => {
         console.error(error);
       });
@@ -87,7 +162,7 @@ export default class SearchedCountryDetails extends React.Component {
 
   render(props) {
     const { searchedCountry } = this.props.route.params;
-
+    const { searchedSlug } = this.props.route.params; 
     // for (var i = 0; i < this.countryList.length; i++) {
     //   // const element = array[i]["Country"];
     //   let element;
@@ -111,7 +186,13 @@ export default class SearchedCountryDetails extends React.Component {
         ></Button>
 
         <Text style={styles.countryName}>{searchedCountry}</Text>
-        <Text>New deaths in {searchedCountry}={this.state.ND}  </Text>
+        {/* <Text> {this.dayOneCountry.Date}</Text> */}
+
+        {/* <Text>here comes the info load {this.dayOneList[1][""]}</Text> */}
+        <Text>"here comes more info "</Text>
+        <Text>
+          New deaths in {searchedCountry}={this.state.ND}{" "}
+        </Text>
       </View>
     );
   }
