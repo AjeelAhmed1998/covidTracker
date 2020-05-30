@@ -1,9 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 // import {} from '@react-navigation/native'
 
 import CountryCard from "./countryCard";
 import { Switch } from "react-native-paper";
+// import { ScrollView } from "react-native-gesture-handler";
 
 export default class EachCountryDetails extends React.Component {
   constructor(props) {
@@ -19,15 +20,30 @@ export default class EachCountryDetails extends React.Component {
     this.country = "";
     this.arrayOfContinents = ["Asia", "Europe"];
     this.continent = "";
-    console.log("hello this is " +this.props.name);
+    console.log("hello this is " + this.props.name);
 
-    
     switch (this.props.route.name) {
       case "Asia":
         this.continent = "Asia";
         break;
       case "Europe":
         this.continent = "Europe";
+        break;
+
+      case "NA":
+        this.continent = "North%20America";
+        break;
+
+      case "SA":
+        this.continent = "South%20America";
+        break;
+
+      case "Africa":
+        this.continent = "Africa";
+        break;
+
+      case "Oceania":
+        this.continent = "Asutralia%2Foceania";
         break;
     }
     // if(this.props.name = "Asia"){
@@ -149,9 +165,9 @@ export default class EachCountryDetails extends React.Component {
 
     // for(const [])
     return (
-      <View style={styles.screenContainer}>
+      <ScrollView style={styles.screenContainer}>
         {array.map((name, index) => (
-          <CountryCard list={array} index={index}></CountryCard>
+          <CountryCard style={styles.CountryCard} list={array} index={index}></CountryCard>
         ))}
 
         {/* {
@@ -173,18 +189,23 @@ export default class EachCountryDetails extends React.Component {
           index = {i}
         /> */}
 
-        <Text>this is where you will get all information, continent wise </Text>
-        <Text>{this.props.route.name}</Text>
-      </View>
+        {/* <Text>this is where you will get all information, continent wise </Text> */}
+        {/* <Text>{this.props.route.name}</Text> */}
+      </ScrollView>
     );
   }
 }
 
 export const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    alignContent: "center",
-  },
+  // screenContainer: {
+  //   flex: 1,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   alignContent: "center",
+  // },
+
+
+  CountryCard:{
+    padding:20, 
+  }
 });
