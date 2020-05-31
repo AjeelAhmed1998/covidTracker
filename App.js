@@ -8,20 +8,16 @@ import {
   DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { Provider as PaperProvider } from "react-native-paper";
-// import { Button, ThemeProvider } from "react-native-elements";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-// import { createDrawerNavigator } from '@react-navigation/drawer';
 import covid from "./assets/COVID19.jpg";
-// // //file imports
 import {
   AntDesign,
   Ionicons,
   FontAwesome,
   Fontisto,
   FontAwesome5,
-  Octicons
+  Octicons,
 } from "@expo/vector-icons";
 import Search from "./screens/search";
 import SearchedCountryDetails from "./screens/searchedCountryDetails";
@@ -30,75 +26,6 @@ import EachCountryDetails from "./screens/eachCountryDetails";
 
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
-//style imports
-// import {styles as globalStyles} from './style/globalStyles';
-
-// export class Search extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {};
-//   }
-
-//   render(props) {
-//     return (
-//       <View>
-//         <TextInput></TextInput>
-//         <Button
-//           title="search"
-//           onPress={() => {
-//             this.props.navigation.navigate("searched country");
-//           }}
-//         ></Button>
-//       </View>
-//     );
-//   }
-// }
-
-// const Search = (props) => {
-//   return (
-//     <View>
-//       <TextInput></TextInput>
-//       <Button
-//         title="search"
-//         onPress={() => {
-//           props.navigation.navigate("searched country");
-//         }}
-//       ></Button>
-//     </View>
-//   );
-// };
-
-// const SearchedCountryDetails = (props) => {
-//   return (
-//     <View>
-//       <Text>searched country details come here</Text>
-//       <Button
-//         title="go back to search"
-//         onPress={() => {
-//           props.navigation.goBack();
-//         }}
-//       ></Button>
-//     </View>
-//   );
-// };
-
-// export class SearchedCountryDetails extends React.Component {
-//   render(props) {
-//     return (
-//       <View>
-//         <Text>searched country details come here</Text>
-//         <Button
-//           title="go back to search"
-//           onPress={() => {
-//             this.props.navigation.goBack();
-//           }}
-//         ></Button>
-//       </View>
-//     );
-//   }
-// }
-
-/////////////////////
 
 const getFont = () => {
   return Font.loadAsync({
@@ -118,7 +45,6 @@ export default function App(props) {
     return (
       <NavigationContainer>
         <MyDrawer />
-        {/* console.log("jj");  */}
       </NavigationContainer>
     );
   } else {
@@ -138,7 +64,6 @@ const Stack = createStackNavigator();
 const StackNavigatorAll = (props) => {
   return (
     <Stack.Navigator
-      // initialRouteName="globalScreen"
       screenOptions={(props) => ({
         headerTitle: "ALL",
         headerTitleAlign: "center",
@@ -146,9 +71,7 @@ const StackNavigatorAll = (props) => {
         headerStyle: {
           backgroundColor: "#37bdb4",
         },
-        headerRight: () => {
-          // <Nbutton title="Edit"></Nbutton>;
-        },
+        headerRight: () => {},
         headerLeft: () => (
           <AntDesign
             style={styles.menuIcon}
@@ -168,7 +91,6 @@ const StackNavigatorAll = (props) => {
 const StackNavigatorGlobal = (props) => {
   return (
     <Stack.Navigator
-      // initialRouteName="globalScreen"
       screenOptions={(props) => ({
         headerTitle: "GLOBAL",
         headerTitleAlign: "center",
@@ -176,9 +98,7 @@ const StackNavigatorGlobal = (props) => {
         headerStyle: {
           backgroundColor: "#37bdb4",
         },
-        headerRight: () => {
-          // <Nbutton title="Edit"></Nbutton>;
-        },
+        headerRight: () => {},
         headerLeft: () => (
           <AntDesign
             style={styles.menuIcon}
@@ -206,9 +126,7 @@ const StackNavigator = (props) => {
         headerStyle: {
           backgroundColor: "#37bdb4",
         },
-        headerRight: () => {
-          // <Nbutton title="Edit"></Nbutton>;
-        },
+        headerRight: () => {},
         headerLeft: () => (
           <AntDesign
             style={styles.menuIcon}
@@ -243,8 +161,6 @@ const MyDrawer = (props) => {
         backgroundColor: "white",
         color: "red",
       }}
-      // screenOptions={}
-      // options={{}}
     >
       <Drawer.Screen
         name={"stack"}
@@ -262,21 +178,6 @@ const MyDrawer = (props) => {
         name={"Global"}
         component={StackNavigatorGlobal}
         options={{
-          //   headerTitle: "hello",
-          //   headerTitleAlign: "center",
-          //   headerTintColor: "white",
-          //   headerStyle: {
-          //     backgroundColor: "#37bdb4",
-          //   },
-          //   headerLeft: (props) => (
-          //     <AntDesign
-          //       style={styles.menuIcon}
-          //       name="menuunfold"
-          //       size={25}
-          //       color={"white"}
-          //       onPress={() => props.navigation.toggleDrawer()}
-          //     />
-          //   ),
           drawerLabel: "Global",
           drawerIcon: () => <Fontisto name="earth" size={20} color="#37bdb4" />,
         }}
@@ -304,7 +205,6 @@ const CustomDrawerContent = (props) => {
       </View>
 
       <DrawerItemList {...props} />
-      {/* <DrawerItem></DrawerItem> */}
 
       <Text style={styles.islamabad}>Made with love in Islamabad.</Text>
     </DrawerContentScrollView>
@@ -321,89 +221,67 @@ function MyTab() {
       barStyle={{ backgroundColor: "#37bdb4" }}
       // shifting={false}
       // labeled={false}
-
-      
     >
       <Tab.Screen
         name="Asia"
         component={EachCountryDetails}
-        options={
-
-          {
-            tabBarColor:"#37bdb4",
-            title: "Asia",
-            tabBarIcon:()=>(
-
-              <FontAwesome5 name="globe-asia" size={20} color="white"/>
-
-            )
-          }
-        }
+        options={{
+          tabBarColor: "#37bdb4",
+          title: "Asia",
+          tabBarIcon: () => (
+            <FontAwesome5 name="globe-asia" size={20} color="white" />
+          ),
+        }}
       ></Tab.Screen>
-      <Tab.Screen 
-      name="Europe" 
-      component={EachCountryDetails}
-      options={
-        
-          {
-            tabBarColor:"#AFCBFF",
-            tabBarIcon:()=>(
-
-              <FontAwesome5 name="globe-europe" size={20} color="white"/>
-
-            )
-          }
-        }
+      <Tab.Screen
+        name="Europe"
+        component={EachCountryDetails}
+        options={{
+          tabBarColor: "#AFCBFF",
+          tabBarIcon: () => (
+            <FontAwesome5 name="globe-europe" size={20} color="white" />
+          ),
+        }}
       ></Tab.Screen>
-      <Tab.Screen name="NA" component={EachCountryDetails}
-      options={
-          {
-            tabBarColor:"#85E3FF",
-            tabBarIcon:()=>(
-
-              <FontAwesome5 name="globe-americas" size={20} color="white"/>
-
-            )
-          }
-        }
+      <Tab.Screen
+        name="NA"
+        component={EachCountryDetails}
+        options={{
+          tabBarColor: "#85E3FF",
+          tabBarIcon: () => (
+            <FontAwesome5 name="globe-americas" size={20} color="white" />
+          ),
+        }}
       ></Tab.Screen>
-      <Tab.Screen name="SA" component={EachCountryDetails}
-      options={
-          {
-            tabBarColor:"#FFCBC1",
-            // tabBarLabel:"South america",
-            tabBarIcon:()=>(
-
-              <FontAwesome5 name="globe-americas" size={20} color="white"/>
-
-            )
-          }
-        }
+      <Tab.Screen
+        name="SA"
+        component={EachCountryDetails}
+        options={{
+          tabBarColor: "#FFCBC1",
+          tabBarIcon: () => (
+            <FontAwesome5 name="globe-americas" size={20} color="white" />
+          ),
+        }}
       ></Tab.Screen>
-      <Tab.Screen name="Africa" component={EachCountryDetails}
-      options={
-          {
-            tabBarColor:"#FFB5E8",
-            tabBarIcon:()=>(
-
-              <FontAwesome5 name="globe-africa" size={20} color="white"/>
-
-            )
-          }
-        }
+      <Tab.Screen
+        name="Africa"
+        component={EachCountryDetails}
+        options={{
+          tabBarColor: "#FFB5E8",
+          tabBarIcon: () => (
+            <FontAwesome5 name="globe-africa" size={20} color="white" />
+          ),
+        }}
       ></Tab.Screen>
-      <Tab.Screen name="Oceania" component={EachCountryDetails}
-      options={
-
-          {
-            tabBarColor:"#97A2FF",
-            tabBarIcon:()=>(
-
-              <FontAwesome5 name="globe-asia" size={20} color="white"/>
-
-            )
-          }
-        }
+      <Tab.Screen
+        name="Oceania"
+        component={EachCountryDetails}
+        options={{
+          tabBarColor: "#97A2FF",
+          tabBarIcon: () => (
+            <FontAwesome5 name="globe-asia" size={20} color="white" />
+          ),
+        }}
       ></Tab.Screen>
     </Tab.Navigator>
   );
@@ -425,7 +303,6 @@ const styles = StyleSheet.create({
   },
 
   covidImage: {
-    // resizeMode: "contain"
     width: 380,
     height: 170,
   },

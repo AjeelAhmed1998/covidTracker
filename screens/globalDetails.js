@@ -1,14 +1,11 @@
 import React, { version } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { log } from "react-native-reanimated";
-// import {} from '@react-navigation/native'
-// import {styles} from './style/globalStyles';
 
 export default class GlobalDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // global: "",
       dataSource: "",
     };
     this.global = "";
@@ -22,7 +19,6 @@ export default class GlobalDetails extends React.Component {
         this.setState(
           {
             dataSource: responseJson,
-            // global: responseJson,
           },
           function () {
             this.keyHolder = responseJson;
@@ -30,20 +26,6 @@ export default class GlobalDetails extends React.Component {
             this.setState({
               global: this.keyHolder.Global,
             });
-            // console.log(this.keyHolder);
-            // console.log(this.state.dataSource);
-
-            // this.setState({
-            //   global: this.keyHolder.Global
-
-            // })
-
-            // // console.log(this.state.global);
-            // console.log("hello");
-            // console.log(this.state.dataSource.Global.NewDeaths);
-            // console.log(this.keyHolder.Global.NewConfirmed);
-            // console.log(this.global.NewDeaths);
-            // console.log(this.state.global.NewDeaths);
           }
         );
       })
@@ -55,13 +37,9 @@ export default class GlobalDetails extends React.Component {
 
   render(props) {
     return (
-      <View style={{alignContent:"center"}}>
+      <View style={{ alignContent: "center" }}>
         <View style={styles.cardView}>
-          
-          {/* <Text>{this.state.dataSource.Global.NewDeaths}</Text> */}
-          {/* <Text>{this.keyHolder.Global.NewConfirmed}</Text> */}
-          {/* <Text>{this.keyHolder.Global.NewConfirmed}</Text> */}
-          <View >
+          <View>
             <Text style={styles.headingStyle}>Global info</Text>
           </View>
 
@@ -100,8 +78,6 @@ export default class GlobalDetails extends React.Component {
                 {this.global.TotalRecovered}
               </Text>
             </View>
-
-            
           </View>
         </View>
       </View>
@@ -111,7 +87,7 @@ export default class GlobalDetails extends React.Component {
 
 const styles = StyleSheet.create({
   cardView: {
-    marginTop: 30, 
+    marginTop: 30,
     backgroundColor: "#AFF8D8",
     alignContent: "center",
     alignItems: "center",
@@ -135,7 +111,7 @@ const styles = StyleSheet.create({
   headingStyle: {
     fontFamily: "Raleway-light",
     fontSize: 24,
-    marginRight: 20
+    marginRight: 20,
   },
 
   infoStyel: {

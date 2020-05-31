@@ -28,11 +28,7 @@ export default class CountryCard extends React.Component {
   }
 
   render(props) {
-    // let a = 0 ;
-    // for(let i = 0; i<2; i++){
-
-    // }
-
+   
     return (
       <View style={styles.cardView}>
         <View >
@@ -106,6 +102,8 @@ const styles = StyleSheet.create({
   headingStyle: {
     fontFamily: "Raleway-light",
     fontSize: 24,
+    paddingRight:20,
+    marginRight: 20
   },
 
   infoStyel: {
